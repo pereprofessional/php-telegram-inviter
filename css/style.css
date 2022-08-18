@@ -1,0 +1,268 @@
+@font-face 
+{
+	font-family: SFLight;
+	src: url(fonts/SFUIText-Light.ttf);
+}
+
+@font-face 
+{
+	font-family: SFRegular;
+	src: url(fonts/SFUIText-Regular.ttf);
+}
+
+@font-face 
+{
+	font-family: SFSemibold;
+	src: url(fonts/SFUIText-Semibold.ttf);
+}
+
+@font-face 
+{
+	font-family: SFBold;
+	src: url(fonts/SFUIText-Bold.ttf);
+}
+
+@font-face 
+{
+	font-family: SFRegularItalic;
+	src: url(fonts/SFUIText-RegularItalic.ttf);
+}
+
+@font-face 
+{
+	font-family: SFSemiboldItalic;
+	src: url(fonts/SFUIText-SemiboldItalic.ttf);
+}
+
+@font-face 
+{
+	font-family: SFBoldItalic;
+	src: url(fonts/SFUIText-BoldItalic.ttf);
+}
+
+
+
+
+@font-face 
+{
+	font-family: Heavy;
+	src: url(fonts/MullerHeavy.otf);
+}
+
+@font-face 
+{
+	font-family: Bold;
+	src: url(fonts/MullerBold.otf);
+}
+
+@font-face 
+{
+	font-family: Medium;
+	src: url(fonts/MullerMedium.otf);
+}
+
+@font-face 
+{
+	font-family: Regular;
+	src: url(fonts/MullerRegular.otf);
+}
+
+@font-face 
+{
+	font-family: Light;
+	src: url(fonts/MullerLight.otf);
+}
+
+@font-face 
+{
+	font-family: Thin;
+	src: url(fonts/MullerThin.otf);
+}
+
+@font-face 
+{
+	font-family: Ultralight;
+	src: url(fonts/MullerUltralight.otf);
+}
+
+@font-face 
+{
+	font-family: HeavyItalic;
+	src: url(fonts/MullerHeavyItalic.otf);
+}
+
+@font-face 
+{
+	font-family: BoldItalic;
+	src: url(fonts/MullerBoldItalic.otf);
+}
+
+@font-face 
+{
+	font-family: MediumItalic;
+	src: url(fonts/MullerMediumItalic.otf);
+}
+
+@font-face 
+{
+	font-family: RegularItalic;
+	src: url(fonts/MullerRegularItalic.otf);
+}
+
+@font-face 
+{
+	font-family: LightItalic;
+	src: url(fonts/MullerLightItalic.otf);
+}
+
+body
+{
+	font-family: SFRegular;
+	background-color: #FDFDFD;
+	color: #333;
+}
+
+i
+{
+	font-style: normal;
+	font-family: RegularItalic;
+}
+
+b, strong
+{
+	font-weight: normal;
+	font-family: Medium;
+}
+
+button
+{
+	background-color: #EEE;
+	outline: none;
+	border: 1px solid #999;
+}
+
+button:hover
+{
+	cursor: pointer;
+	background-color: #DDD;
+}
+
+button:focus
+{
+	outline: none;
+}
+
+a
+{
+	color: #4978b7;
+}
+
+a:hover
+{
+	color: #4978b7;
+}
+
+a:focus
+{
+	outline: none;
+}
+
+label
+{
+	margin: 0px;
+}
+
+input[type=text]
+{
+	background-color: #FFF;
+	outline: none;
+	border: 1px solid #999;
+}
+
+table
+{
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+
+table tr:nth-child(odd) td
+{
+	background-color: #F1F1F1;
+}
+
+table th
+{
+	font-weight: normal;
+	font-family: Medium;
+}
+
+table td
+{
+	padding: 5px;
+}
+
+hr
+{
+	width: 1200px;
+	border-color: 1px solid #999;
+}
+
+
+
+
+
+
+
+
+.workarea
+{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	flex-direction: column;
+}
+
+.segment
+{
+	width: 1200px;
+	border: 1px solid #999;
+	box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	padding: 10px;
+	position: relative;
+}
+
+.segment-ttl
+{
+	display: block;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.input-fld
+{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.input-fld label
+{
+	width: 150px;
+}
+
+.pre-response
+{
+	margin-top: 10px;
+}
+
+.pre-response pre
+{
+	background-color: #EEE;
+	padding: 10px;
+	white-space: pre-wrap;
+}
