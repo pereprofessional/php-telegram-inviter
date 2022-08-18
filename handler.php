@@ -7,16 +7,17 @@ class MadelineHandler
 
     function __construct()
     {
-        include 'madeline/madeline.php';
+        include 'mp/vendor/autoload.php';
         include 'config.php';
 
-        $this->mysql_connection = DB::DBconnect();
+        $mysql_constants = DB::showBDConstants();
+        $this->mysql_connection = mysqli_connect($mysql_constants['ip'], $mysql_constants['user'], $mysql_constants['pass'], $mysql_constants['db']);
         mysqli_set_charset($this->mysql_connection, "utf8mb4");
     }
 
     public function init($session_name) // Инициализировтаь сессию (процесс авторизации или информация о юзере)
     {
-        $this->MadelineProto = new \danog\MadelineProto\API('../session.'.$session_name);
+        $this->MadelineProto = new \danog\MadelineProto\API('sessions/session.'.$session_name);
         return $this->MadelineProto->start();
 
     }
@@ -29,7 +30,7 @@ class MadelineHandler
 
     public function getAllSessions() // Получить все сессии
     {
-        $dir    = '../';
+        $dir    = 'sessions/';
         $files = preg_grep('~^session.~', scandir($dir));
         $sessions = [];
         foreach ($files as $file)
@@ -199,12 +200,12 @@ class MadelineHandler
                 $reqs[$key]['invitee'] = $usersFromMysql[0]['user_username'];
             }
             var_dump($reqs[$key]['session_name']);
-            //$res = yield $this->MadelineProto->channels->inviteToChannel(['channel' => $req['channel'], 'users' => [ 'mirkhel_25' ], ], [ 'async' => true ] ); // baikal_miners, 680205619
-            yield $this->MadelineProto->messages->sendMessage([
+            $res = $this->MadelineProto->channels->inviteToChannel(['channel' => $req['channel'], 'users' => [ 'mirkhel_25' ], ], [ 'async' => true ] ); // baikal_miners, 680205619
+            /*yield $this->MadelineProto->messages->sendMessage([
                 'message' => 'test',
                 'peer' => 'bishaevasily'
-            ]);
-            //var_dump($res);
+            ]);*/
+            var_dump($res);
         }
         return $reqs;
     }
@@ -296,7 +297,7 @@ class MadelineHandler
             {
                 if ($info['full']['can_view_participants'] == true)
                 {
-                    $linksFromMysql = mysqli_query($this->mysql_connection, "SELECT * FROM inviter_channels WHERE ch_id = '$source_internal_id' AND tg_src_username = '".$info['Chat']['username']."'")->fetch_all(MYSQLI_ASSOC);
+                    $linksFromMysql = mysqli_query($this->mysql_connection, "SELECT * FROM inviter_source_channels WHERE ch_id = '$source_internal_id' AND tg_src_username = '".$info['Chat']['username']."'")->fetch_all(MYSQLI_ASSOC);
 
                     if (count($linksFromMysql) > 0)
                         return [ 'status' => 'fail', 'message' => 'These channels are already linked in DB.', 'code' => 5 ];
@@ -315,7 +316,7 @@ class MadelineHandler
                         $mysql_fields = "ch_id,tg_src_id,tg_src_username,tg_src_title,tg_src_type,tg_src_participants_count";
                         $mysql_values = "'$source_internal_id','$tg_src_id','$tg_src_username','$tg_src_title','$tg_src_type','$tg_src_participants_count'";
 
-                        if (mysqli_query($this->mysql_connection, "INSERT INTO inviter_channels ($mysql_fields) VALUES ($mysql_values)"))
+                        if (mysqli_query($this->mysql_connection, "INSERT INTO inviter_source_channels ($mysql_fields) VALUES ($mysql_values)"))
                             return [ 'status' => 'success', 'response' => 'Session data inserted into DB.', 'code' => 1  ];
                         else
                             return [ 'status' => 'fail', 'response' => 'Could not insert into DB.', 'code' => 5  ];
@@ -338,7 +339,7 @@ class MadelineHandler
     {
         $this->init($session_name);
 
-        $linksFromMysql = mysqli_query($this->mysql_connection, "SELECT * FROM inviter_channels WHERE id = '$link_id'")->fetch_all(MYSQLI_ASSOC);
+        $linksFromMysql = mysqli_query($this->mysql_connection, "SELECT * FROM inviter_source_channels WHERE id = '$link_id'")->fetch_all(MYSQLI_ASSOC);
 
         if (count($linksFromMysql) == 0)
         {
@@ -441,12 +442,12 @@ class MadelineHandler
     }
 
     public function getChannelsFromDB()
-    {
+    {   
         $channelsFromMysql = mysqli_query($this->mysql_connection, "
-            SELECT in_ch.id, in_ch.tg_src_username, in_ch.tg_src_participants_count, in_ch.enable, ch.username as ch_username
-            FROM inviter_channels in_ch
-            JOIN channels ch
-            ON in_ch.ch_id = ch.id
+            SELECT s_ch.id, s_ch.tg_src_username, s_ch.tg_src_participants_count, s_ch.enable, t_ch.username as ch_username
+            FROM inviter_source_channels s_ch
+            JOIN inviter_target_channels t_ch
+            ON s_ch.ch_id = t_ch.id
         ")->fetch_all(MYSQLI_ASSOC);
 
         foreach ($channelsFromMysql as $key => $value)
@@ -475,12 +476,12 @@ class MadelineHandler
     {
         if ($type == 'enable')
         {
-            if (mysqli_query($this->mysql_connection,"UPDATE inviter_channels SET enable = 1 WHERE id = $link_id"))
+            if (mysqli_query($this->mysql_connection,"UPDATE inviter_source_channels SET enable = 1 WHERE id = $link_id"))
                 return [ 'status' => 'success', 'response' => 'Updated.' ];
         }
         elseif ($type == 'disable')
         {
-            if (mysqli_query($this->mysql_connection,"UPDATE inviter_channels SET enable = 0 WHERE id = $link_id"))
+            if (mysqli_query($this->mysql_connection,"UPDATE inviter_source_channels SET enable = 0 WHERE id = $link_id"))
                 return [ 'status' => 'success', 'response' => 'Updated.' ];
         }
     }

@@ -1,5 +1,5 @@
 <?
-$time_start = microtime(true); 
+/*$time_start = microtime(true); 
 require_once('handler.php');
 $ml = new MadelineHandler();
 
@@ -40,7 +40,7 @@ function simpleAlgo2()
     $participants = $ml->getParticipantsForCron($links[0]['id'], count($sessions));
     echo '$ml->getParticipantsForCron($link_id, $limit):';
     echo '<pre>';
-    //var_dump($participants);
+    var_dump($participants);
     echo '</pre>';
     echo '<br/><br/>';
 
@@ -54,7 +54,7 @@ function simpleAlgo2()
     echo '<br/><br/>foreach sessions: <br/><br/>';
     foreach ($sessions as $key => $value)
     {
-        if ($sessions[$key]['session_name'] != 'test4') continue;
+        //if ($sessions[$key]['session_name'] != 'test4') continue;
         $reqs[] = [
             'session_name' => $sessions[$key]['session_name'],
             'invitee' => [
@@ -65,6 +65,7 @@ function simpleAlgo2()
             'invite_by_internal_id' => true,
         ];
     }
+    var_dump($reqs);
     var_dump($ml->multipleInviteToChannel($reqs));
 
 }
@@ -103,7 +104,7 @@ function formatBytes($bytes, $precision = 2)
 
 
 
-return;
+return;*/
 
 
 
