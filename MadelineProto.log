@@ -1812,3 +1812,49 @@ UpdateHandler:  	Parsing updates (updateShort) received via the socket...
 FeedLoop:       	Resumed update feed loop generic
 Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 3, 0 left
 Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 3, 0 left
+Session:        	Garbage collected 2 incoming messages in DC 2, 0 left
+PingLoop, ozon671gamess:       	Ping DC 4.0
+PingLoop, ozon671gamess:       	Ping DC 2.0
+Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 4, 0 left
+Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 4, 0 left
+Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 4 outgoing messages in DC 2, 5 left
+UpdateHandler:  	Parsing updates (updateShort) received via the socket...
+FeedLoop:       	Resumed update feed loop generic
+Session, ozon671gamess:        	Garbage collected 7 incoming messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 5 outgoing messages in DC 2, 0 left
+Session:        	Garbage collected 1 incoming messages in DC 2, 0 left
+Session:        	Garbage collected 1 incoming messages in DC 2, 0 left
+Session:        	Garbage collected 2 outgoing messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 4 incoming messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 3 outgoing messages in DC 2, 0 left
+PingLoop, ozon671gamess:       	Ping DC 1.0
+Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 1, 0 left
+Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 1, 0 left
+Session:        	Garbage collected 1 outgoing messages in DC 2, 1 left
+PingLoop, ozon671gamess:       	Ping DC 5.0
+Session, ozon671gamess:        	Garbage collected 0 outgoing messages in DC 5, 1 left
+PingLoop, ozon671gamess:       	Ping DC 3.0
+ messages in DC 2, 0 left
+Session:        	Garbage collected 1 outgoing messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 3, 0 left
+Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 3, 0 left
+Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 5, 0 left
+Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 5, 0 left
+PingLoop, ozon671gamess:       	Ping DC 4.0
+PingLoop, ozon671gamess:       	Ping DC 2.0
+Session, ozon671gamess:        	Garbage collected 1 incoming messages in DC 4, 0 left
+Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 4, 0 left
+Session, ozon671gamess:        	Garbage collected 1 outgoing messages in DC 2, 1 left
+Session, ozon671gamess:        	Garbage collected 8 incoming messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 7 outgoing messages in DC 2, 0 left
+SessionPaths:   	Waiting for exclusive lock of C:\OpenServer\domains\vert-dtf-loc.xyz\sessions/session.bv.safe.php.lock...
+SessionPaths:   	Got exclusive lock of C:\OpenServer\domains\vert-dtf-loc.xyz\sessions/session.bv.safe.php.lock...
+SessionPaths:   	Waiting for exclusive lock of C:\OpenServer\domains\vert-dtf-loc.xyz\sessions/session.bv.lightState.php.lock...
+SessionPaths:   	Got exclusive lock of C:\OpenServer\domains\vert-dtf-loc.xyz\sessions/session.bv.lightState.php.lock...
+APIWrapper:     	Saved session!
+Session:        	Garbage collected 1 incoming messages in DC 2, 0 left
+Session:        	Garbage collected 2 outgoing messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 4 incoming messages in DC 2, 0 left
+Session, ozon671gamess:        	Garbage collected 3 outgoing messages in DC 2, 0 left
+PingLoop, ozon671gamess:       	Ping DC 1.0
