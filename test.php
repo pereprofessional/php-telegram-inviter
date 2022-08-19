@@ -1,4 +1,5 @@
 <?
+phpinfo();
 include 'config.php';
 
 $mysql_constants = DB::showBDConstants();
