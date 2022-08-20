@@ -1,0 +1,49 @@
+{
+    "name": "amphp/redis",
+    "description": "A non-blocking Redis client for Amp.",
+    "keywords": [
+        "amp",
+        "amphp",
+        "async",
+        "client",
+        "redis"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/amphp/redis",
+    "authors": [
+        {
+            "name": "Niklas Keller",
+            "email": "me@kelunik.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/amphp/redis/issues"
+    },
+    "require": {
+        "php": ">=7.1",
+        "amphp/amp": "^2.2.1",
+        "amphp/cache": "^1.2.1",
+        "amphp/socket": "^1",
+        "league/uri-parser": "^1.4",
+        "amphp/sync": "^1.1"
+    },
+    "require-dev": {
+        "amphp/phpunit-util": "^1.1.2",
+        "phpunit/phpunit": "^7 | ^8",
+        "amphp/php-cs-fixer-config": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amp\\Redis\\": "src"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amp\\Redis\\": "test",
+            "Amp\\Cache\\Test\\": "vendor/amphp/cache/test"
+        }
+    }
+}

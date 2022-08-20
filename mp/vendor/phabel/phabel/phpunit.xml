@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+  backupGlobals="false"
+  backupStaticAttributes="false"
+  bootstrap="tools/testGen.php"
+  colors="true"
+  convertErrorsToExceptions="true"
+  convertNoticesToExceptions="true"
+  convertWarningsToExceptions="true"
+  processIsolation="false"
+  stopOnFailure="false">
+  <coverage>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="Main">
+      <directory phpVersion="8.0">tests/Target</directory>
+      <directory phpVersion="8.0">tests/Target80</directory>
+      <directory phpVersion="7.4">tests/Target74</directory>
+      <directory phpVersion="7.3">tests/Target73</directory>
+      <directory phpVersion="7.2">tests/Target72</directory>
+      <directory phpVersion="7.1">tests/Target71</directory>
+
+
+      <directory phpVersion="8.0">tests/Target1080</directory>
+      <directory phpVersion="7.4">tests/Target1074</directory>
+      <directory phpVersion="7.3">tests/Target1073</directory>
+      <directory phpVersion="7.2">tests/Target1072</directory>
+      <directory phpVersion="7.1">tests/Target1071</directory>
+
+      <directory phpVersion="8.0">tests/Target80Future</directory>
+      <directory phpVersion="7.4">tests/Target74Future</directory>
+      <directory phpVersion="7.3">tests/Target73Future</directory>
+      <directory phpVersion="7.2">tests/Target72Future</directory>
+      <directory phpVersion="7.1">tests/Target71Future</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

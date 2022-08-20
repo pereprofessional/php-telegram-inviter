@@ -1,0 +1,57 @@
+{
+    "name": "amphp/postgres",
+    "description": "Asynchronous PostgreSQL client for Amp.",
+    "keywords": [
+        "database",
+        "db",
+        "postgresql",
+        "postgre",
+        "pgsql",
+        "asynchronous",
+        "async"
+    ],
+    "homepage": "http://amphp.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aaron Piotrowski",
+            "email": "aaron@trowski.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "amphp/amp": "^2",
+        "amphp/sql": "^1",
+        "amphp/sql-common": "^1"
+    },
+    "require-dev": {
+        "ext-pgsql": "*",
+        "ext-pq": "*",
+        "amphp/phpunit-util": "^1.1.2",
+        "phpunit/phpunit": "^8 | ^7",
+        "amphp/php-cs-fixer-config": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amp\\Postgres\\": "src"
+        },
+        "files": [
+            "src/functions.php",
+            "src/Internal/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amp\\Postgres\\Test\\": "test"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "cs": "php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix -v --diff",
+        "test": "@php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text"
+    }
+}

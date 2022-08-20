@@ -1,0 +1,170 @@
+{
+    "name": "phabel/phabel",
+    "description": "Write and deploy modern PHP 8 code, today.",
+    "type": "composer-plugin",
+    "require": {
+        "php": ">=8.1 <8.2",
+        "ext-json": "*",
+        "composer-plugin-api": "^2.0",
+        "ext-tokenizer": "*"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.4",
+        "amphp/file": "^2.0"
+    },
+    "provide": {
+        "phabelio/phabel": "self.version"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniil Gentili",
+            "email": "daniil@daniil.it"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phabel\\": "src",
+            "PhabelVendor\\Amp\\": [
+                "vendor-bundle/amphp/amp/lib"
+            ],
+            "PhabelVendor\\Amp\\ByteStream\\": [
+                "vendor-bundle/amphp/byte-stream/lib"
+            ],
+            "PhabelVendor\\Amp\\Parallel\\": [
+                "vendor-bundle/amphp/parallel/lib"
+            ],
+            "PhabelVendor\\Amp\\Parser\\": [
+                "vendor-bundle/amphp/parser/lib"
+            ],
+            "PhabelVendor\\Amp\\Process\\": [
+                "vendor-bundle/amphp/process/lib"
+            ],
+            "PhabelVendor\\Amp\\Serialization\\": [
+                "vendor-bundle/amphp/serialization/src"
+            ],
+            "PhabelVendor\\Amp\\Sync\\": [
+                "vendor-bundle/amphp/sync/src"
+            ],
+            "PhabelVendor\\PhpParser\\": [
+                "vendor-bundle/phabel/php-parser/lib/PhpParser"
+            ],
+            "PhabelVendor\\PHPStan\\PhpDocParser\\": [
+                "vendor-bundle/phpstan/phpdoc-parser/src/"
+            ],
+            "PhabelVendor\\Psr\\Container\\": [
+                "vendor-bundle/psr/container/src/"
+            ],
+            "PhabelVendor\\Psr\\Log\\": [
+                "vendor-bundle/psr/log/Psr/Log/"
+            ],
+            "PhabelVendor\\Symfony\\Component\\Console\\": [
+                "vendor-bundle/symfony/console/"
+            ],
+            "Symfony\\Polyfill\\Ctype\\": [
+                "vendor-bundle/symfony/polyfill-ctype/"
+            ],
+            "Symfony\\Polyfill\\Intl\\Grapheme\\": [
+                "vendor-bundle/symfony/polyfill-intl-grapheme/"
+            ],
+            "Symfony\\Polyfill\\Intl\\Normalizer\\": [
+                "vendor-bundle/symfony/polyfill-intl-normalizer/"
+            ],
+            "Symfony\\Polyfill\\Mbstring\\": [
+                "vendor-bundle/symfony/polyfill-mbstring/"
+            ],
+            "Symfony\\Polyfill\\Php73\\": [
+                "vendor-bundle/symfony/polyfill-php73/"
+            ],
+            "Symfony\\Polyfill\\Php80\\": [
+                "vendor-bundle/symfony/polyfill-php80/"
+            ],
+            "PhabelVendor\\Symfony\\Component\\Process\\": [
+                "vendor-bundle/symfony/process/"
+            ],
+            "PhabelVendor\\Symfony\\Contracts\\Service\\": [
+                "vendor-bundle/symfony/service-contracts/"
+            ],
+            "PhabelVendor\\Symfony\\Component\\String\\": [
+                "vendor-bundle/symfony/string/"
+            ]
+        },
+        "files": [
+            "src/guard.php",
+            "vendor-bundle/amphp/amp/lib/functions.php",
+            "vendor-bundle/amphp/amp/lib/Internal/functions.php",
+            "vendor-bundle/amphp/byte-stream/lib/functions.php",
+            "vendor-bundle/amphp/parallel/lib/Context/functions.php",
+            "vendor-bundle/amphp/parallel/lib/Sync/functions.php",
+            "vendor-bundle/amphp/parallel/lib/Worker/functions.php",
+            "vendor-bundle/amphp/process/lib/functions.php",
+            "vendor-bundle/amphp/serialization/src/functions.php",
+            "vendor-bundle/amphp/sync/src/functions.php",
+            "vendor-bundle/amphp/sync/src/ConcurrentIterator/functions.php",
+            "vendor-bundle/symfony/deprecation-contracts/function.php",
+            "vendor-bundle/symfony/polyfill-ctype/bootstrap.php",
+            "vendor-bundle/symfony/polyfill-intl-grapheme/bootstrap.php",
+            "vendor-bundle/symfony/polyfill-intl-normalizer/bootstrap.php",
+            "vendor-bundle/symfony/polyfill-mbstring/bootstrap.php",
+            "vendor-bundle/symfony/polyfill-php73/bootstrap.php",
+            "vendor-bundle/symfony/polyfill-php80/bootstrap.php",
+            "vendor-bundle/symfony/string/Resources/functions.php"
+        ],
+        "classmap": [
+            "vendor-bundle/symfony/polyfill-intl-normalizer/Resources/stubs",
+            "vendor-bundle/symfony/polyfill-php73/Resources/stubs",
+            "vendor-bundle/symfony/polyfill-php80/Resources/stubs"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhabelTest\\": "tests/"
+        }
+    },
+    "extra": {
+        "class": "Phabel\\Composer\\Plugin",
+        "plugin-modifies-downloads": true
+    },
+    "archive": {
+        "exclude": [
+            "/tests",
+            "/testsGenerated"
+        ]
+    },
+    "scripts": {
+        "typeHintGen": "php80 tools/typeHintGen.php",
+        "exprGen": "@php tools/exprGen.php",
+        "build": [
+            "@typeHintGen",
+            "@exprGen",
+            "@cs-fix",
+            "@test"
+        ],
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "test": [
+            "@phpunit",
+            "@coverage"
+        ],
+        "test-simple": "SKIP_COMPOSER=1 php vendor/bin/phpunit --coverage-php=coverage/phpunit.php",
+        "test-full": [
+            "@phpunit",
+            "@phpunitExpr",
+            "@coverage"
+        ],
+        "cs": "php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix -v --diff",
+        "phpunit": "@php vendor/bin/phpunit --coverage-php=coverage/phpunit.php",
+        "coverage": "@php tools/ci/coverageMerge.php",
+        "phpunitExpr": "@php tools/testExprGen.php"
+    },
+    "config": {
+        "process-timeout": 0,
+        "allow-plugins": true
+    },
+    "bin": [
+        "bin/phabel"
+    ]
+}

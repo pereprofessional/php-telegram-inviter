@@ -1,0 +1,30 @@
+{
+    "name": "danog/class-finder",
+    "description": "Fork of haydenpierce/class-finder with support for traits, interfaces and functions",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hayden Pierce",
+            "email": "hayden@haydenpierce.com"
+        },
+        {
+            "name": "Daniil Gentili",
+            "email": "daniil@daniil.it"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.36",
+        "mikey179/vfsstream": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "danog\\ClassFinder\\": "src/",
+            "danog\\ClassFinder\\UnitTest\\": "test/unit"
+        }
+    }
+}

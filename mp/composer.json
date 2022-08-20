@@ -137,6 +137,9 @@
         "allow-plugins": {
             "bamarni/composer-bin-plugin": true,
             "phabel/phabel": true
+        },
+        "platform": {
+            "php": "8.1.8"
         }
     }
 }
