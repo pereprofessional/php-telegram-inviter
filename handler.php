@@ -7,17 +7,17 @@ class MadelineHandler
 
     function __construct()
     {
-        include 'mp/vendor/autoload.php';
-        include 'config.php';
+        include dirname(__FILE__).'/mp/vendor/autoload.php';
+        include dirname(__FILE__).'/config.php';
 
-        $mysql_constants = DB::showBDConstants();
+        $mysql_constants = DB::getDatabaseInfo();
         $this->mysql_connection = mysqli_connect($mysql_constants['ip'], $mysql_constants['user'], $mysql_constants['pass'], $mysql_constants['db']);
         mysqli_set_charset($this->mysql_connection, "utf8mb4");
     }
 
     public function init($session_name) // Инициализировтаь сессию (процесс авторизации или информация о юзере)
     {
-        $this->MadelineProto = new \danog\MadelineProto\API('sessions/session.'.$session_name);
+        $this->MadelineProto = new \danog\MadelineProto\API(dirname(__FILE__).'/sessions/session.'.$session_name);
         return $this->MadelineProto->start();
 
     }
