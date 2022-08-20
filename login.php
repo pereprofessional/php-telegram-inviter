@@ -19,5 +19,5 @@ require_once(dirname(__FILE__).'/handler.php');
 $ml = new MadelineHandler();
 $ml->refreshProfileInfo($_GET['session']);
 
-
+//
 ?>
