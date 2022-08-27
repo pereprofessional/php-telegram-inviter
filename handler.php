@@ -444,7 +444,7 @@ class MadelineHandler
     public function getChannelsFromDB()
     {   
         $channelsFromMysql = mysqli_query($this->mysql_connection, "
-            SELECT s_ch.id, s_ch.tg_src_username, s_ch.tg_src_participants_count, s_ch.enable, t_ch.username as ch_username
+            SELECT s_ch.id, s_ch.tg_src_username, s_ch.tg_src_participants_count, s_ch.enable, t_ch.id as ch_id, t_ch.username as ch_username
             FROM inviter_source_channels s_ch
             JOIN inviter_target_channels t_ch
             ON s_ch.ch_id = t_ch.id
@@ -554,5 +554,50 @@ class MadelineHandler
             }
         }
     }
+
+    public function addQueueToScheduler($queue)
+    {
+        $res = 0;
+        foreach ($queue as $key => $q) 
+        {
+            $mysql_values = '';
+            $mysql_fields = '';
+            $mysql_values_and_fields_divider = ',';
+            $mysql_fields .= 'target_channel_id'.$mysql_values_and_fields_divider;
+            $mysql_values .= $q['target_channel_id'].$mysql_values_and_fields_divider;
+            $mysql_fields .= 'target_channel_username'.$mysql_values_and_fields_divider;
+            $mysql_values .= "'".$q['target_channel_username']."'".$mysql_values_and_fields_divider;
+            $mysql_fields .= 'session_id'.$mysql_values_and_fields_divider;
+            $mysql_values .= $q['session_id'].$mysql_values_and_fields_divider;
+            $mysql_fields .= 'session_name'.$mysql_values_and_fields_divider;
+            $mysql_values .= "'".$q['session_name']."'".$mysql_values_and_fields_divider;
+            $mysql_fields .= 'participant_id'.$mysql_values_and_fields_divider;
+            $mysql_values .= $q['participant_id'].$mysql_values_and_fields_divider;
+            $mysql_fields .= 'participant_username'.$mysql_values_and_fields_divider;
+            $mysql_values .= "'".$q['participant_username']."'".$mysql_values_and_fields_divider;
+            $mysql_fields .= 'status'.$mysql_values_and_fields_divider;
+            $mysql_values .= $q['status'].$mysql_values_and_fields_divider;
+            $mysql_fields = substr($mysql_fields, 0, -(strlen($mysql_values_and_fields_divider)));
+            $mysql_values = substr($mysql_values, 0, -(strlen($mysql_values_and_fields_divider)));
+
+            if (mysqli_query($this->mysql_connection, "INSERT INTO inviter_schedule ($mysql_fields) VALUES ($mysql_values)"))
+                $res++;
+        }
+        
+        return $res;
+    }
+
+    public function getSchedulerCreatedStatuses()
+    {
+        $sql = "SELECT * FROM inviter_schedule WHERE status = 0";
+        $fromMysql = mysqli_query($this->mysql_connection, $sql)->fetch_all(MYSQLI_ASSOC);
+        return $fromMysql;
+    }
+
+    public function updateSchedulerStatusById($id)
+    {
+        mysqli_query($this->mysql_connection,"UPDATE inviter_schedule SET status = 1 WHERE id = $id");
+    }
+
 
 }

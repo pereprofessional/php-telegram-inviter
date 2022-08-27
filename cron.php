@@ -109,7 +109,6 @@ return;*/
 
 
 
-
 require_once('handler.php');
 $ml = new MadelineHandler();
 
@@ -156,7 +155,7 @@ function simpleAlgo()
     $response_array = [];
     foreach ($sessions as $key => $value)
     {
-        $rand = mt_rand(0, 1);
+        $rand = mt_rand(0, 1); $rand = 1;
         if ($rand == 1)
         {
             array_push(
