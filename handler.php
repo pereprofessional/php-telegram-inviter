@@ -211,7 +211,7 @@ class MadelineHandler
     }
 
     // возможно пригласить по @username
-    public function inviteToChannel($session_name, $invitee, $channel, $invite_by_internal_id = false)
+    public function inviteToChannel($session_name, $invitee, $channel, $invite_by_internal_id = false, $participant_id)
     {
         $this->init($session_name);
 
@@ -248,6 +248,11 @@ class MadelineHandler
                                     $sql = "UPDATE inviter_participants SET invited = 1 WHERE id = '".$invitee_source['id']."' AND src_ch_id = '".$invitee_source['link_id']."'";
                                     mysqli_query($this->mysql_connection, $sql);
                                 }
+                                else
+                                {
+                                    $sql = "UPDATE inviter_participants SET invited = 1 WHERE id = '".$participant_id."'";
+                                    mysqli_query($this->mysql_connection, $sql);
+                                }
                                 $this->deleteMessageAboutAddingUser($session_name, $channel);
                                 return [ 'status' => 'success', 'message' => 'Received messageActionChatAddUser.', 'code' => 1 ];
                             }
@@ -258,6 +263,11 @@ class MadelineHandler
                         $sql = "UPDATE inviter_participants SET invited = 4 WHERE id = '".$invitee_source['id']."' AND src_ch_id = '".$invitee_source['link_id']."'";
                         mysqli_query($this->mysql_connection, $sql);
                     }
+                    else
+                    {
+                        $sql = "UPDATE inviter_participants SET invited = 4 WHERE id = '".$participant_id."'";
+                        mysqli_query($this->mysql_connection, $sql);
+                    }
                     return [ 'status' => 'fail', 'message' => 'Got some updates, but did not received messageActionChatAddUser.', 'code' => 4 ];
                 }
                 else
@@ -265,6 +275,11 @@ class MadelineHandler
                     if ($invite_by_internal_id)
                     {
                         $sql = "UPDATE inviter_participants SET invited = 3 WHERE id = '".$invitee_source['id']."' AND src_ch_id = '".$invitee_source['link_id']."'";
+                        mysqli_query($this->mysql_connection, $sql);
+                    }
+                    else
+                    {
+                        $sql = "UPDATE inviter_participants SET invited = 3 WHERE id = '".$participant_id."'";
                         mysqli_query($this->mysql_connection, $sql);
                     }
                     return [ 'status' => 'fail', 'message' => 'There is no error, but no invite too. Probably user has been invited before.', 'code' => 3 ];
@@ -279,6 +294,11 @@ class MadelineHandler
             if ($invite_by_internal_id)
             {
                 $sql = "UPDATE inviter_participants SET invited = $code WHERE id = '".$invitee_source['id']."' AND src_ch_id = '".$invitee_source['link_id']."'";
+                mysqli_query($this->mysql_connection, $sql);
+            }
+            else
+            {
+                $sql = "UPDATE inviter_participants SET invited = $code WHERE id = '".$participant_id."'";
                 mysqli_query($this->mysql_connection, $sql);
             }
             return [ 'status' => 'fail', 'message' => $e->getMessage(), 'code' => $code ];

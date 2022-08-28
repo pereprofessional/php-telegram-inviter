@@ -21,7 +21,8 @@ for ($i = 0; $i < 1; $i++) // только один инвайт делаем, �
                     $queue[$i]['session_name'],
                     $queue[$i]['participant_username'],
                     $queue[$i]['target_channel_username'],
-                    false
+                    false,
+                    $queue[$i]['participant_id']
                 ),
             'participant_id' => $queue[$i]['participant_id'],
             'target_channel_username' => $queue[$i]['target_channel_username'],
