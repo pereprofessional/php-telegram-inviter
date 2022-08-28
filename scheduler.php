@@ -108,7 +108,7 @@ echo '<br/><br/>';
 flog('Inserted queue rows: '.$res.'. ');
 
 
-
+flog('End of file.');
 
 function flog($text, $notime = false)
 {
